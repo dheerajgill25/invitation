@@ -25,6 +25,7 @@ import ViewShot from 'react-native-view-shot';
 import {fontFamilies} from '../../../components/FontPickerModal';
 import WeddingEvent from '../components/WeddingEvent';
 import {useKeyboard} from '../../../hooks/useKeyboard';
+import {useReducedMotion} from 'react-native-reanimated';
 
 const colors = [
   '#000000',
@@ -39,6 +40,8 @@ const colors = [
 const {width, height} = Dimensions.get('window');
 
 const WeddingContainer = () => {
+  const reducedMotion = useReducedMotion();
+
   const full = useRef<ViewShot>(null);
   const [preview, setPreview] = useState<any>(null);
 
@@ -190,7 +193,7 @@ const WeddingContainer = () => {
             {!keyboardShown && (
               <TouchableHighlight
                 onPress={() => {
-                  setCurrentSetting('');
+                  // setCurrentSetting('');
                   bottomSheetModalRef.current?.close();
                 }}
                 style={styles.buttonContainer}>
@@ -253,14 +256,14 @@ const WeddingContainer = () => {
 
             <BottomSheetModal
               ref={bottomSheetModalRef}
-              index={1}
+              index={0}
+              keyboardBehavior="interactive"
+              animateOnMount={true}
+              android_keyboardInputMode="adjustPan"
               snapPoints={snapPoints}
               onChange={handleSheetChanges}
               backdropComponent={props => (
-                <BottomSheetBackdrop
-                  {...props}
-                  pressBehavior="close" // This closes the bottom sheet when the backdrop is pressed
-                />
+                <BottomSheetBackdrop {...props} pressBehavior="close" />
               )}>
               <View style={styles.modalContentContainer}>
                 {renderModalContent()}

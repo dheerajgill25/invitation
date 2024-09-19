@@ -12,7 +12,7 @@ import {
 import React, {useEffect, useRef, useState} from 'react';
 import moment from 'moment';
 import DatePicker from 'react-native-date-picker';
-import Wedding from '../assets/template.png';
+import Wedding from '../../../assets/template.png';
 import DraggableInput from '../../../components/DraggableInput';
 
 const {width, height} = Dimensions.get('window');
